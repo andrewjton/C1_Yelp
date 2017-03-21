@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Transaction
-from .forms import TransactionForm
+from .forms import TransactionForm, TransactionForm2
 from django.utils import timezone
 
 # Create your views here.
@@ -22,7 +22,7 @@ def first(request):
 
 def second(request):
 	if request.method == "POST":
-		form = TransactionForm(request.POST)
+		form = TransactionForm2(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.price_range = request.price_range
@@ -32,5 +32,5 @@ def second(request):
 			post.save()
 			return redirect('/')
 	else:
-		form = TransactionForm()
+		form = TransactionForm2()
 	return render(request, 'crispyforms_test/second.html', {'form': form})
