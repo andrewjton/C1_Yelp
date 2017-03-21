@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gc(k1+l%9(&nk(d=$*_$9-81+2v-evk#l8#8*(e5!hrb)!6=-9'
+with open(os.path.join(BASE_DIR, '../config.json'), 'r') as f:
+    config = json.load(f)
+
+SECRET_KEY = config["secret-keys"]["yelp_v1"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,6 +35,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Application definition
 
 INSTALLED_APPS = [
+	'crispyforms_test',
 	'crispy_forms',
 #	'formtools',
     'django.contrib.admin',

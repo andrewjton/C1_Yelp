@@ -1,0 +1,10 @@
+{% extends 'crispyforms_test/base.html' %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

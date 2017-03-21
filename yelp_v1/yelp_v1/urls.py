@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^/forms', include('crispyforms_test.urls', namespace="crispyforms_test"))
+	url(r'^forms/', include('crispyforms_test.urls', namespace="crispyforms_test"))
 ]
