@@ -1,0 +1,24 @@
+Django Forms + Crispy Forms + FormTools Library
+http://django-crispy-forms.readthedocs.io/en/latest/
+https://tutorial.djangogirls.org/en/django_forms/
+https://blog.bixly.com/awesome-forms-django-crispy-forms
+https://godjango.com/29-crispy-forms/
+https://django-formtools.readthedocs.io/en/latest/wizard.html#defining-form-classes
+
+-Crispy forms is good because it integrates easily with front end javascript libraries
+-Decided against using sessions, because realistically a user doesn't need to store each session
+-decided against using form-wizard because I don't need to split the form across multiple pages (too much loading & overhead)
+
+
+Yelp API
+transaction search: https://www.yelp.com/developers/documentation/v3/transactions_search
+Business search: https://www.yelp.com/developers/documentation/v3/business_search
+prototype API: https://github.com/Yelp/yelp-fusion/tree/master/fusion/python
+
+Google API
+-map rendering, travel time, etc.
+
+Front end library
+very nice image based selection --> https://rvera.github.io/image-picker/ 
+
+

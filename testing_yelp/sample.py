@@ -38,7 +38,7 @@ except ImportError:
 # OAuth credential placeholders that must be filled in by users.
 # You can find them on
 # https://www.yelp.com/developers/v3/manage_app
-with open('config.json', 'r') as f:
+with open('../config.json', 'r') as f:
     config = json.load(f)
 CLIENT_ID = config["yelp-api"]["CLIENT-ID"] #store secret key in local json config file
 CLIENT_SECRET = config["yelp-api"]["ClIENT-SECRET"]
@@ -150,7 +150,7 @@ def query_api(term, location):
     response = search(bearer_token, term, location)
 
     businesses = response.get('businesses')
-
+    print(businesses)
     if not businesses:
         print(u'No businesses for {0} in {1} found.'.format(term, location))
         return
