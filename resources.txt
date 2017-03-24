@@ -17,6 +17,7 @@ prototype API: https://github.com/Yelp/yelp-fusion/tree/master/fusion/python
 
 Google API
 -map rendering, travel time, etc.
+python library:  https://github.com/googlemaps/google-maps-services-python
 
 Front end library
 very nice image based selection --> https://rvera.github.io/image-picker/ 
