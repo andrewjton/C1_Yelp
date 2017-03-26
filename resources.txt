@@ -21,5 +21,5 @@ python library:  https://github.com/googlemaps/google-maps-services-python
 
 Front end library
 very nice image based selection --> https://rvera.github.io/image-picker/ 
-
-
+good, simple template --> https://www.bootstrapzero.com/bootstrap-template/siimple
+nice form template --> http://www.jquery-steps.com/Examples

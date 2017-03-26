@@ -1,0 +1,87 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+
+    <link rel="stylesheet" href="{% static 'testing_ajax/css/main-steps.css' %}">
+    <link rel="stylesheet" href="{% static 'testing_ajax/css/jquery.steps.css' %}">
+{% endblock %}
+
+{% block javascript %}
+
+  <script src="{% static 'testing_ajax/js/jquery.steps.min.js' %}"></script>
+   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+      <script type="text/javascript">
+        var form = $("#example-form");
+        form.validate({
+          errorPlacement: function errorPlacement(error, element) { element.before(error); },
+          rules: {
+            confirm: {
+              equalTo: "#password"
+            }
+          }
+        });
+        form.children("div").steps({
+          headerTag: "h3",
+          bodyTag: "section",
+          transitionEffect: "slideLeft",
+          onStepChanging: function (event, currentIndex, newIndex)
+          {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+          },
+          onFinishing: function (event, currentIndex)
+          {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+          },
+          onFinished: function (event, currentIndex)
+          {
+            alert("Submitted!");
+          }
+        });
+      </script>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+      <form id="example-form" method="post">
+        {% csrf_token %}
+        <div>
+          <h3>Food Genre</h3>
+          <section>
+            <p>IMAGE STUFF!!</p>
+
+          </section>
+          <h3>Profile</h3>
+          <section>
+            <label for="name">First name *</label>
+            <input id="name" name="name" type="text" class="">
+            <label for="surname">Last name *</label>
+            <input id="surname" name="surname" type="text" class="">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="text" class=" email">
+            <p>(*) Mandatory</p>
+          </section>
+          <h3>Other Preferences</h3>
+          <section>
+            <label for="price_range">Maximum Cost Range (0-5) *</label>
+            <input id="price_range" type="range" name="price_range" min="0" max="5" class="">
+            <label for="deals">Deals?</label>
+            <input id="price_range" type="checkbox" name="deals" value="deals"> I want deals<br>
+            <label for="preferences">Additional Keywords *</label>
+            <input id="preferences" name="preferences" type="text" class="">
+            <p>(*) Mandatory</p>
+          </section>
+          <h3>Finish</h3>
+          <section>
+            <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+            <button type="submit">Sign up</button>
+          </section>
+        </div>
+      </form>
+  </div>>
+
+{% endblock %}
