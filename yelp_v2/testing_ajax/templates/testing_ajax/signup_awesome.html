@@ -47,7 +47,18 @@
 
 {% block content %}
   <div class="container">
-      <form id="example-form" method="post">
+  {% if form.errors %}
+      {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <p>{{ field.html_name }} : </p>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+  {% endif %}
+
+      <form action="/transaction/" id="example-form" method="post">
         {% csrf_token %}
         <div>
           <h3>Food Genre</h3>
@@ -57,6 +68,8 @@
           </section>
           <h3>Profile</h3>
           <section>
+            <label for="location">Location*</label>
+            <input id="location" name="location" type="text" class="">
             <label for="name">First name *</label>
             <input id="name" name="name" type="text" class="">
             <label for="surname">Last name *</label>
@@ -70,15 +83,19 @@
             <label for="price_range">Maximum Cost Range (0-5) *</label>
             <input id="price_range" type="range" name="price_range" min="0" max="5" class="">
             <label for="deals">Deals?</label>
-            <input id="price_range" type="checkbox" name="deals" value="deals"> I want deals<br>
+            <input id="deals" type="checkbox" name="deals" value="1"> I want deals<br>
             <label for="preferences">Additional Keywords *</label>
             <input id="preferences" name="preferences" type="text" class="">
             <p>(*) Mandatory</p>
           </section>
-          <h3>Finish</h3>
+          <h3>Submit</h3>
           <section>
             <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
             <button type="submit">Sign up</button>
+          </section>
+          <h3>Success</h3>
+          <section>
+            <p>filler</p>
           </section>
         </div>
       </form>

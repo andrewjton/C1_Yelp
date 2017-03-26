@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from .forms import TransactionForm
+from .models import Transaction
+from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import timezone
 # Create your views here.
 
 
@@ -26,13 +29,33 @@ def validate_username(request):
 
 def transaction(request):
     if request.method == 'POST':
+        print("hi")
         # create a form instance and populate it with data from the request:
-        form = TransactionForm(request.POST)
+        form = TransactionForm(request.POST, initial={'location': 'Charlottesville, Virginia'})
         # check whether it's valid:
+        # print("Request: ------------")
+        # print(request.POST)
+        # print("Form Errors: ------------")
+        # print(form.errors)
         if form.is_valid():
+            # print(form.cleaned_data['name'])
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+
+            name = request.POST.get('name', '')
+            surname = request.POST.get('surname', '')
+            email = request.POST.get('email', '')
+            preferences = request.POST.get('preferences', '')
+            price_range = request.POST.get('price_range', '')
+            deals = request.POST.get('deals', '')
+
+            listing_date = timezone.now()
+            location = request.POST.get('location', '')
+            
+            transaction= Transaction(name=name, surname=surname, preferences=preferences, price_range=price_range, deals=deals, listing_date=listing_date, location = location)
+            transaction.save()
+            
             return HttpResponseRedirect('/success/')
 
     # if a GET (or any other method) we'll create a blank form
@@ -42,4 +65,4 @@ def transaction(request):
     return render(request, 'testing_ajax/signup_awesome.html', {'form': form})
 
 def success(request):
-	return render("great job!")
+	return HttpResponse('Congrats dude')
