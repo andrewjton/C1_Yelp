@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Siimple - Free Bootstrap 3 Landing Page</title>
+    <!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!--	  Jquery & js.cookie & js.steps-->
+	      <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+<!--	  		<script src="assets/js/js.cookie.js"></script> -->
+	  		<script src="assets/js/jquery.steps.js"></script> 
+	  			<link rel="stylesheet" href="assets/css/jquery.steps.css">
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+	  
+	  <link href="image-picker/image-picker.css" rel="stylesheet">
+<script src="http://rvera.github.io/image-picker/image-picker/image-picker.min.js"></script>
+<script src="http://desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
+<link rel="stylesheet" href="http://rvera.github.io/image-picker/image-picker/image-picker.css" />
+
+    <!-- siimple style -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- =======================================================
+        Theme Name: Siimple
+        Theme URL: https://bootstrapmade.com/free-bootstrap-landing-page/
+        Author: BootstrapMade
+        Author URL: https://bootstrapmade.com
+    ======================================================= -->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Siimple</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Sign up</a></li>
+			<li><a href="#">Sign in</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<h1>Simple landing page</h1>
+					<h2 class="subtitle">No need huge slogan, we believe in less is better</h2>
+					<form class="form-inline signup" role="form">
+					  <div class="form-group">
+					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
+					  </div>
+					  <button type="submit" class="btn btn-theme">Get it now</button>
+					</form>	
+				</div>
+				<div class="col-lg-4 col-lg-offset-2">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					  <ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					  </ol>					
+					  <!-- slides -->
+					  <div class="carousel-inner">
+						<div class="item active">
+						  <img src="assets/img/slide1.png" alt="">
+						</div>
+						<div class="item">
+						  <img src="assets/img/slide2.png" alt="">
+						</div>
+						<div class="item">
+						  <img src="assets/img/slide3.png" alt="">
+						</div>
+					  </div>
+					</div>		
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	  
+	<div id="body">
+	<div class="container">
+
+		<form>
+		  <div id="container">
+
+
+			<h1>Image Picker</h1>
+
+
+			<h3>Selects Multiple</h3>
+			<p class="highlight">
+			  Image Picker works great on select multiple elements too.
+			</p>
+			<div class="picker">
+			  <select multiple="multiple" class="image-picker show-html">
+				<option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
+				<option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
+				<option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
+				<option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
+			  </select>
+			</div>
+
+		  </div>
+
+		  <script type="text/javascript">
+
+			jQuery("select.image-picker").imagepicker({
+			  hide_select:  false,
+			});
+
+			jQuery("select.image-picker.show-labels").imagepicker({
+			  hide_select:  false,
+			  show_label:   true,
+			});
+
+			jQuery("select.image-picker.limit_callback").imagepicker({
+			  limit_reached:  function(){alert('We are full!')},
+			  hide_select:    false
+			});
+
+			var container = jQuery("select.image-picker.masonry").next("ul.thumbnails");
+			container.imagesLoaded(function(){
+			  container.masonry({
+				itemSelector:   "li",
+			  });
+			});
+
+		  </script>
+
+		  </form>
+		
+	</div>
+	</div>
+
+	  <div id="body">
+	  	<div class="container">
+			
+			<form id="example-form" action="#">
+				<div>
+					<h3>Account</h3>
+					<section>
+						<label for="userName">User name *</label>
+						<input id="userName" name="userName" type="text" class="required">
+						<label for="password">Password *</label>
+						<input id="password" name="password" type="text" class="required">
+						<label for="confirm">Confirm Password *</label>
+						<input id="confirm" name="confirm" type="text" class="required">
+						<p>(*) Mandatory</p>
+					</section>
+					<h3>Profile</h3>
+					<section>
+						<label for="name">First name *</label>
+						<input id="name" name="name" type="text" class="required">
+						<label for="surname">Last name *</label>
+						<input id="surname" name="surname" type="text" class="required">
+						<label for="email">Email *</label>
+						<input id="email" name="email" type="text" class="required email">
+						<label for="address">Address</label>
+						<input id="address" name="address" type="text">
+						<p>(*) Mandatory</p>
+					</section>
+					<h3>Hints</h3>
+					<section>
+						<ul>
+							<li>Foo</li>
+							<li>Bar</li>
+							<li>Foobar</li>
+						</ul>
+					</section>
+					<h3>Finish</h3>
+					<section>
+						<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+					</section>
+				</div>
+			</form>
+			<script type="text/javascript">
+				var form = $("#example-form");
+				form.validate({
+					errorPlacement: function errorPlacement(error, element) { element.before(error); },
+					rules: {
+						confirm: {
+							equalTo: "#password"
+						}
+					}
+				});
+				form.children("div").steps({
+					headerTag: "h3",
+					bodyTag: "section",
+					transitionEffect: "slideLeft",
+					onStepChanging: function (event, currentIndex, newIndex)
+					{
+						form.validate().settings.ignore = ":disabled,:hidden";
+						return form.valid();
+					},
+					onFinishing: function (event, currentIndex)
+					{
+						form.validate().settings.ignore = ":disabled";
+						return form.valid();
+					},
+					onFinished: function (event, currentIndex)
+					{
+						alert("Submitted!");
+					}
+				});
+			</script>
+		</div>
+	  </div>
+	  
+	<div id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+	            <p class="copyright">&copy; Siimple Theme</p>
+			</div>
+            <div class="col-md-6">
+                <div class="credits">
+                    <!-- 
+                        All the links in the footer should remain intact. 
+                        You can delete the links only if you purchased the pro version.
+                        Licensing information: https://bootstrapmade.com/license/
+                        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Siimple
+                    -->
+                    <a href="https://bootstrapmade.com/free-business-bootstrap-themes-website-templates/">Business Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+            </div>
+		</div>		
+	</div>	
+	</div>
+
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="image-picker/image-picker.min.js"></script>
+    
+</body>
+</html>
