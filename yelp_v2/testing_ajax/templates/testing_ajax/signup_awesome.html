@@ -6,9 +6,17 @@
 
     <link rel="stylesheet" href="{% static 'testing_ajax/css/main-steps.css' %}">
     <link rel="stylesheet" href="{% static 'testing_ajax/css/jquery.steps.css' %}">
+    <link rel="stylesheet" href="{% static 'testing_ajax/css/image-picker.css' %}">
+
+    <link rel="stylesheet" href="http://rvera.github.io/image-picker/image-picker/image-picker.css" />
+
 {% endblock %}
 
 {% block javascript %}
+<script src="http://rvera.github.io/image-picker/image-picker/image-picker.min.js"></script>
+
+<script src="http://desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
 
   <script src="{% static 'testing_ajax/js/jquery.steps.min.js' %}"></script>
    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -23,6 +31,7 @@
             }
           }
         });
+
         form.children("div").steps({
           headerTag: "h3",
           bodyTag: "section",
@@ -43,6 +52,30 @@
           }
         });
       </script>
+      <script type="text/javascript">
+
+      jQuery("select.image-picker").imagepicker({
+        hide_select:  false,
+      });
+
+      jQuery("select.image-picker.show-labels").imagepicker({
+        hide_select:  false,
+        show_label:   true,
+      });
+
+      jQuery("select.image-picker.limit_callback").imagepicker({
+        limit_reached:  function(){alert('We are full!')},
+        hide_select:    false
+      });
+
+      var container = jQuery("select.image-picker.masonry").next("ul.thumbnails");
+      container.imagesLoaded(function(){
+        container.masonry({
+        itemSelector:   "li",
+        });
+      });
+
+      </script>
 {% endblock %}
 
 {% block content %}
@@ -60,10 +93,31 @@
 
       <form action="/transaction/" id="example-form" method="post">
         {% csrf_token %}
-        <div>
+
+<!-- Image Picker-->
+        <section class="container">
+        <h1>Image Picker</h1>
+        <h3>Selects Multiple</h3>
+        <p class="highlight">
+          Image Picker works great on select multiple elements too.
+        </p>
+        <section class="picker">
+          <select multiple="multiple" class="image-picker show-html" name="preferences">
+          <option data-img-src="http://placehold.it/350x150" value="1">Cute Kitten 1</option>
+          <option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
+          <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
+          <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
+          </select>
+        </section>
+        </section>
+<!-- Jquery Steps Menu    -->   
+        <div class="wizard">
           <h3>Food Genre</h3>
           <section>
             <p>IMAGE STUFF!!</p>
+           <label for="location">Location*</label>
+
+          <input type="image" src="http://placehold.it/350x150" width="48" height="48">
 
           </section>
           <h3>Profile</h3>

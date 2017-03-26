@@ -29,14 +29,13 @@ def validate_username(request):
 
 def transaction(request):
     if request.method == 'POST':
-        print("hi")
         # create a form instance and populate it with data from the request:
         form = TransactionForm(request.POST, initial={'location': 'Charlottesville, Virginia'})
         # check whether it's valid:
-        # print("Request: ------------")
-        # print(request.POST)
-        # print("Form Errors: ------------")
-        # print(form.errors)
+        print("Request: ------------")
+        print(request.POST)
+        print("Form Errors: ------------")
+        print(form.errors)
         if form.is_valid():
             # print(form.cleaned_data['name'])
             # process the data in form.cleaned_data as required
@@ -48,8 +47,10 @@ def transaction(request):
             email = request.POST.get('email', '')
             preferences = request.POST.get('preferences', '')
             price_range = request.POST.get('price_range', '')
-            deals = request.POST.get('deals', '')
-
+            if (request.POST.get('deals', '')):
+                deals = request.POST.get('deals', '')
+            else:
+            	deals = 0
             listing_date = timezone.now()
             location = request.POST.get('location', '')
             
