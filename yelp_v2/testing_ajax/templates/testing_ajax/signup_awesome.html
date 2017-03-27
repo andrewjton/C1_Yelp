@@ -3,23 +3,31 @@
 {% load static %}
 
 {% block stylesheet %}
-
     <link rel="stylesheet" href="{% static 'testing_ajax/css/main-steps.css' %}">
     <link rel="stylesheet" href="{% static 'testing_ajax/css/jquery.steps.css' %}">
+
     <link rel="stylesheet" href="{% static 'testing_ajax/css/image-picker.css' %}">
-
     <link rel="stylesheet" href="http://rvera.github.io/image-picker/image-picker/image-picker.css" />
-
+     <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+    min-height: 300px;
+    margin: auto;
+      width: 60%;
+    padding: 10px;
+      display: block;
+      }
+      </style>
 {% endblock %}
 
 {% block javascript %}
 <script src="http://rvera.github.io/image-picker/image-picker/image-picker.min.js"></script>
-
 <script src="http://desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
 
   <script src="{% static 'testing_ajax/js/jquery.steps.min.js' %}"></script>
-   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
       <script type="text/javascript">
         var form = $("#example-form");
@@ -76,9 +84,60 @@
       });
 
       </script>
+
+<!--       Google Maps Scripts-->
+      <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            document.getElementById('location').value=  map.getCenter().lat() + ", " + map.getCenter().lng();
+
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXPMwAa0egeF0ui7MJaPkvfaoN14ozTvk&callback=initMap">
+    </script>
 {% endblock %}
 
 {% block content %}
+<br>
+<br>
+
   <div class="container">
   {% if form.errors %}
       {% for field in form %}
@@ -95,30 +154,29 @@
         {% csrf_token %}
 
 <!-- Image Picker-->
-        <section class="container">
-        <h1>Image Picker</h1>
-        <h3>Selects Multiple</h3>
-        <p class="highlight">
-          Image Picker works great on select multiple elements too.
-        </p>
+
+<!-- Jquery Steps Menu    -->   
+        <div class="wizard">
+          <h3>Food Genre</h3>
+          <section>
         <section class="picker">
           <select multiple="multiple" class="image-picker show-html" name="preferences">
-          <option data-img-src="http://placehold.it/350x150" value="1">Cute Kitten 1</option>
+          <option data-img-src="http://placehold.it/250x150" value="1">Cute Kitten 1</option>
           <option data-img-src="http://placekitten.com/180/200" value="2">Cute Kitten 2</option>
           <option data-img-src="http://placekitten.com/130/200" value="3">Cute Kitten 3</option>
           <option data-img-src="http://placekitten.com/270/200" value="4">Cute Kitten 4</option>
           </select>
         </section>
-        </section>
-<!-- Jquery Steps Menu    -->   
-        <div class="wizard">
-          <h3>Food Genre</h3>
+          </section>
+          <h3>Other Preferences</h3>
           <section>
-            <p>IMAGE STUFF!!</p>
-           <label for="location">Location*</label>
-
-          <input type="image" src="http://placehold.it/350x150" width="48" height="48">
-
+            <label for="price_range">Maximum Cost Range (0-5) *</label>
+            <input id="price_range" type="range" name="price_range" min="0" max="5" class="">
+            <label for="deals">Deals?</label>
+            <input id="deals" type="checkbox" name="deals" value="1"> I want deals<br>
+            <label for="preferences">Additional Keywords *</label>
+            <input id="preferences" name="preferences" type="text" class="">
+            <p>(*) Mandatory</p>
           </section>
           <h3>Profile</h3>
           <section>
@@ -132,27 +190,29 @@
             <input id="email" name="email" type="text" class=" email">
             <p>(*) Mandatory</p>
           </section>
-          <h3>Other Preferences</h3>
-          <section>
-            <label for="price_range">Maximum Cost Range (0-5) *</label>
-            <input id="price_range" type="range" name="price_range" min="0" max="5" class="">
-            <label for="deals">Deals?</label>
-            <input id="deals" type="checkbox" name="deals" value="1"> I want deals<br>
-            <label for="preferences">Additional Keywords *</label>
-            <input id="preferences" name="preferences" type="text" class="">
-            <p>(*) Mandatory</p>
-          </section>
+
           <h3>Submit</h3>
           <section>
             <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
             <button type="submit">Sign up</button>
           </section>
-          <h3>Success</h3>
-          <section>
-            <p>filler</p>
-          </section>
         </div>
       </form>
   </div>>
 
+<br>
+<br>
+<br>
+
+<!-- Google Maps Embedded-->
+<div class="col-md-10 col-md-offset-1">  
+<form>
+<div id="map"></div>
+</form>
+</div>
+<div class="container">
+</div>
+</div>
+
+<br>
 {% endblock %}
