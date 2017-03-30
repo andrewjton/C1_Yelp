@@ -26,3 +26,11 @@ Search QUERY
 2. Ask user to choose additional preferences [cost, additional keywords, deals, etc.]
 3. query api
 4. display results on nice page & save transaction + google maps integration that shows map + shows distance of each selection
+
+Designing Yelp-API interface
+0. finishing form redirects you to next page w/ a json including all your parameters
+1. next page contains a javascript ajax call to your django api which you call w/ your parameters
+2. django api recieves your parameters and returns it as json
+3. your page renders the json
+4. ideally something renders while the execution occurs
+django api: /query-yelp/keywords/price/categories/radius/location/deals
