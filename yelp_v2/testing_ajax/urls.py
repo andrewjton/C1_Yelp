@@ -8,5 +8,6 @@ urlpatterns = [
 	url(r'^ajax/validate_username/$', views.validate_username, name='validate_username'),
     url(r'^transaction/$', views.transaction, name='transaction'),
     url(r'^success/$', views.success, name='success'),
+    url(r'^restaurants/$', views.restaurants, name='restaurants'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

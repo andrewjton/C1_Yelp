@@ -67,3 +67,6 @@ def transaction(request):
 
 def success(request):
 	return HttpResponse('Congrats dude')
+
+def restaurants(request):
+    return render(request, 'testing_ajax/restaurants.html')    
