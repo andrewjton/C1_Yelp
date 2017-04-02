@@ -28,7 +28,7 @@ try:
     from urllib.error import HTTPError
     from urllib.parse import quote
     from urllib.parse import urlencode
-except ImportError:
+except ImportError:	
     # Fall back to Python 2's urllib2 and urllib
     from urllib2 import HTTPError
     from urllib import quote
@@ -110,7 +110,7 @@ def request(host, path, bearer_token, url_params=None):
     return response.json()
 
 
-def search(bearer_token, term, location):
+def search(bearer_token, term, longitude, latitude):
     """Query the Search API by a search term and location.
     Args:
         term (str): The search term passed to the API.
@@ -121,7 +121,10 @@ def search(bearer_token, term, location):
 
     url_params = {
         'term': term.replace(' ', '+'),
-        'location': location.replace(' ', '+'),
+        # 'location': location.replace(' ', '+'),
+        'longitude': longitude.replace(' ', '+'),
+        'latitude': latitude.replace(' ', '+'),
+
         'limit': SEARCH_LIMIT
     }
     return request(API_HOST, SEARCH_PATH, bearer_token, url_params=url_params)

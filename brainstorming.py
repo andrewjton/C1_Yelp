@@ -34,3 +34,23 @@ Designing Yelp-API interface
 3. your page renders the json
 4. ideally something renders while the execution occurs
 django api: /query-yelp/keywords/price/categories/radius/location/deals
+	
+TODO
+add more preferences to api query
+error handling for no results
+lat/long support for searching api
+remove hard-coding for searchapi	
+
+
+Features
+image-based selection
+HTML 5 location (use chrome!)
+Google maps integration and location visualization
+Wizard form
+asynchronous loading (javascript and ajax)
+db storage of data transactions
+responsive web design
+Django forms
+Long/lat lookup (only...)
+Yelp Fusion API 
+internal rest api

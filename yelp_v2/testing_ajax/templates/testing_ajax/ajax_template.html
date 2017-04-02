@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block javascript %}
+<script>
+
+$(document).ready(function(){
+    $(document).ajaxStart(function(){
+        $("#wait").css("display", "block");
+    });
+    $(document).ajaxComplete(function(){
+        $("#wait").css("display", "none");
+    });
+    $("button").click(function(){
+        // $("#txt").load('api/yelp_api/');
+        var value = "{{json.location}}";
+		value = value.replace(/[\(\)]/g,'').split(',');
+        var longitude = value[1];
+        var latitude = value[0];
+
+		$.post( "api/yelp_api/", {'preferences': '{{json.preferences}}', 'latitude': latitude, 'longitude': longitude})
+			.done( function( results ) {
+	    	var results1 = JSON.stringify(results);
+	    	var obj = JSON.parse(results1);
+	    	var restaurants = obj.resp.businesses[0];
+	    	$("#search-results-section").css({"display": "block"});
+	    	$("#restaurant-name").text(JSON.stringify(restaurants.name));
+
+	    	$("#restaurant-addr").text(JSON.stringify(restaurants.location.display_address));
+	    	$("#restaurant-phon").text(JSON.stringify(restaurants.display_phone));
+	    	$("#restaurant-rat").text(JSON.stringify(restaurants.rating));
+	    	$("#restaurant-dist").text(JSON.stringify(restaurants.distance) + " meters");
+
+
+	    	document.getElementById("restaurant-image").src = restaurants.image_url;
+	    	document.getElementById("restaurant-URL").href = restaurants.url;
+		});  
+		      
+  //       $.ajax({
+	 //    type: "POST",
+	 //    url: 'api/yelp_api/',
+	 //    contentType: "application/json",
+	 //    data: JSON.stringify({'preferences': '{{json.preferences}}', 'latitude': latitude, 'longitude': longitude}),
+	 //    // beforeSend: function() { $.mobile.showPageLoadingMsg("b", "Loading...", true) },
+	 //    // complete: function() { $.mobile.hidePageLoadingMsg() },
+	 //    success: function(results) {
+	 //    	var results1 = JSON.stringify(results);
+	 //    	var obj = JSON.parse(results1);
+	 //    	var restaurants = obj.resp.businesses[0];
+	 //    	$("#search-results-section").css({"display": "block"});
+	 //    	$("#restaurant-name").text(JSON.stringify(restaurants.name));
+
+	 //    	$("#restaurant-addr").text(JSON.stringify(restaurants.location.display_address));
+	 //    	$("#restaurant-phon").text(JSON.stringify(restaurants.display_phone));
+	 //    	$("#restaurant-rat").text(JSON.stringify(restaurants.rating));
+	 //    	$("#restaurant-dist").text(JSON.stringify(restaurants.name));
+
+
+	 //    	document.getElementById("restaurant-image").src = restaurants.image_url;
+	 //    	document.getElementById("restaurant-URL").href = restaurants.url;
+	 //    	//change src
+	 //    	//change link
+	 //    	//change rating
+	 //    	//desc: address, phone, rating
+	 //    },
+	 //    // success: function(data) {alert("ajax worked"); },
+	 //    error: function(data) {alert("ajax error"); },
+	 //    dataType: 'json'
+		// });
+    });
+
+
+
+
+});
+</script>
+
+{% endblock %}
+
+{% block stylesheet %}
+<!-- search results page style -->
+<style>
+.mb20 { margin-bottom: 20px; } 
+
+hgroup { padding-left: 15px; border-bottom: 1px solid #ccc; }
+hgroup h1 { font: 500 normal 1.625em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin-top: 0; line-height: 1.15; }
+hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin: 0; padding-bottom: 10px; }
+
+.search-result .thumbnail { border-radius: 0 !important; }
+.search-result:first-child { margin-top: 0 !important; }
+.search-result { margin-top: 20px; }
+.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
+.search-result ul li i { padding-right: 5px; }
+.search-result .col-md-7 { position: relative; }
+.search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 > a, .search-result i { color: #248dc1 !important; }
+.search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; }
+.search-result span.plus { position: absolute; right: 0; top: 126px; }
+.search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+.search-result span.plus a:hover { background-color: #414141; }
+.search-result span.plus a i { color: #fff !important; }
+.search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div id="txt"><h2>Let AJAX change this text</h2></div>
+
+<button>Change Content</button>
+
+<div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src="{% static 'testing_ajax/gif/default.gif' %}" width="64" height="64" /><br>Loading..</div>
+
+
+
+<div class="container">
+    <hgroup class="mb20">
+		<h1>Search Results</h1>
+		<h2 class="lead">The top <strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>								
+	</hgroup>
+
+    <section id="search-results-section" style="display: none;" class="col-xs-12 col-sm-6 col-md-12">
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img id="restaurant-image" style="height: 140px; width:250px;" src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul class="meta-search">
+					<li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
+					<li><i class="glyphicon glyphicon-time"></i> <span>OPEN</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Restaurant</span></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+				<h3><a id="restaurant-name" href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
+				<p id="restaurant-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
+				<table>
+					<tr><td>Rating: </th><th id="restaurant-rat">Rating 	</th></tr>
+					<tr><td>Address: </th><th id="restaurant-addr">Address </th></tr>
+					<tr><td>Phone: </td><th id="restaurant-phon">Phone</th></tr>
+					<tr><td>Distance: </th><th id="restaurant-dist">Distance </th></tr>
+				</table>
+						
+                <span class="plus"><a id="restaurant-URL" href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix border"></span>
+		</article>
+
+
+	</section>
+</div>
+{% endblock %}

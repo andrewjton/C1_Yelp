@@ -24,3 +24,8 @@ very nice image based selection --> https://rvera.github.io/image-picker/
 good, simple template --> https://www.bootstrapzero.com/bootstrap-template/siimple
 nice form template --> http://www.jquery-steps.com/Examples
 results page template --> http://bootsnipp.com/user/snippets/qlzD0
+
+Jquery/AJAx
+docs --> http://api.jquery.com/jquery.ajax/
+w3 example --> https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_ajax_ajaxcomplete
+JSON formatter tool --> https://jsonformatter.curiousconcept.com/
