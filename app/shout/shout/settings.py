@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=i2qzz4=49tr+f^1(9%k4#n*cev6clt(qocq@$_zay^3p=*0*!'
+with open(os.path.join(BASE_DIR, 'config.json'), 'r') as f:
+    config = json.load(f)
+
+SECRET_KEY = config["secret-keys"]["shout"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'yell',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

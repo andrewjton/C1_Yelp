@@ -1,7 +1,5 @@
 from django.shortcuts import render, render_to_response
-from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
 from .forms import TransactionForm
 from .models import Transaction
@@ -18,24 +16,7 @@ import time
 # Create your views here.
 
 
-
-class SignUpView(CreateView):
-    template_name = 'testing_ajax/signup.html'
-    form_class = UserCreationForm
-
-
-
-
-def validate_username(request):
-    username = request.GET.get('username', None)
-    data = {
-        'is_taken': User.objects.filter(username__iexact=username).exists()
-    }
-    if data['is_taken']:
-        data['error_message'] = 'A user with this username already exists.'
-    return JsonResponse(data)
-
-def transaction(request):
+def home(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = TransactionForm(request.POST, initial={'location': 'Charlottesville, Virginia'})
@@ -71,14 +52,11 @@ def transaction(request):
 
     return render(request, 'testing_ajax/signup_awesome.html', {'form': form})
 
-def success(request):
-	return HttpResponse('Congrats dude')
+def testing(request):
+	return HttpResponse('Hi! This feature is still in testing. The goal is to visualize the dining preferences of users around the world using their sanitized data.')
 
 def restaurants(request):
-    return render(request, 'testing_ajax/restaurants.html')    
-
-def ajax_template(request):
-    return render(request, 'testing_ajax/ajax_template.html')
+    return render(request, 'testing_ajax/ajax_template.html')    
 
 @csrf_exempt
 def yelp_api(request):

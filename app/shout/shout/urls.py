@@ -20,6 +20,6 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('testing_ajax.urls', namespace="testing_ajax"))
+    url(r'^', include('yell.urls', namespace="yell"))
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
