@@ -10,7 +10,7 @@ $(document).ready(function(){
     $(document).ajaxComplete(function(){
         $("#wait").css("display", "none");
     });
-    $("button").click(function(){
+    $(document).ready(function(){
         // $("#txt").load('api/yelp_api/');
         var value = "{{json.location}}";
 		value = value.replace(/[\(\)]/g,'').split(',');
@@ -21,18 +21,33 @@ $(document).ready(function(){
 			.done( function( results ) {
 	    	var results1 = JSON.stringify(results);
 	    	var obj = JSON.parse(results1);
-	    	var restaurants = obj.resp.businesses[0];
+	    	var restaurants = obj.resp.businesses;
 	    	$("#search-results-section").css({"display": "block"});
-	    	$("#restaurant-name").text(JSON.stringify(restaurants.name));
+	    	$("#restaurant-name").text(JSON.stringify(restaurants[0].name));
+	    	$("#restaurant-addr").text(JSON.stringify(restaurants[0].location.display_address));
+	    	$("#restaurant-phon").text(JSON.stringify(restaurants[0].display_phone));
+	    	$("#restaurant-rat").text(JSON.stringify(restaurants[0].rating));
+	    	$("#restaurant-dist").text(JSON.stringify(restaurants[0].distance) + " meters");
+	    	document.getElementById("restaurant-image").src = restaurants[0].image_url;
+	    	document.getElementById("restaurant-URL").href = restaurants[0].url;
 
-	    	$("#restaurant-addr").text(JSON.stringify(restaurants.location.display_address));
-	    	$("#restaurant-phon").text(JSON.stringify(restaurants.display_phone));
-	    	$("#restaurant-rat").text(JSON.stringify(restaurants.rating));
-	    	$("#restaurant-dist").text(JSON.stringify(restaurants.distance) + " meters");
+	    	$("#restaurant-name1").text(JSON.stringify(restaurants[1].name));
+	    	$("#restaurant-addr1").text(JSON.stringify(restaurants[1].location.display_address));
+	    	$("#restaurant-phon1").text(JSON.stringify(restaurants[1].display_phone));
+	    	$("#restaurant-rat1").text(JSON.stringify(restaurants[1].rating));
+	    	$("#restaurant-dist1").text(JSON.stringify(restaurants[1].distance) + " meters");
+	    	document.getElementById("restaurant-image1").src = restaurants[1].image_url;
+	    	document.getElementById("restaurant-URL1").href = restaurants[1].url;
+
+	    	$("#restaurant-name2").text(JSON.stringify(restaurants[2].name));
+	    	$("#restaurant-addr2").text(JSON.stringify(restaurants[2].location.display_address));
+	    	$("#restaurant-phon2").text(JSON.stringify(restaurants[2].display_phone));
+	    	$("#restaurant-rat2").text(JSON.stringify(restaurants[2].rating));
+	    	$("#restaurant-dist2").text(JSON.stringify(restaurants[2].distance) + " meters");
+	    	document.getElementById("restaurant-image2").src = restaurants[2].image_url;
+	    	document.getElementById("restaurant-URL2").href = restaurants[2].url;
 
 
-	    	document.getElementById("restaurant-image").src = restaurants.image_url;
-	    	document.getElementById("restaurant-URL").href = restaurants.url;
 		});  
 		      
   //       $.ajax({
@@ -106,18 +121,14 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 
 {% block content %}
 
-<div id="txt"><h2>Let AJAX change this text</h2></div>
-
-<button>Change Content</button>
-
 <div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src="{% static 'testing_ajax/gif/default.gif' %}" width="64" height="64" /><br>Loading..</div>
 
 
 
 <div class="container">
     <hgroup class="mb20">
-		<h1>Search Results</h1>
-		<h2 class="lead">The top <strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>								
+		<h1 style="font-size: 40px;">Search Results</h1>
+		<h2 class="lead">The top <strong class="text-danger">3</strong> results were found for your search<strong class="text-danger"></strong></h2>								
 	</hgroup>
 
     <section id="search-results-section" style="display: none;" class="col-xs-12 col-sm-6 col-md-12">
@@ -134,7 +145,6 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
 				<h3><a id="restaurant-name" href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
-				<p id="restaurant-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>
 				<table>
 					<tr><td>Rating: </th><th id="restaurant-rat">Rating 	</th></tr>
 					<tr><td>Address: </th><th id="restaurant-addr">Address </th></tr>
@@ -147,7 +157,55 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 			<span class="clearfix border"></span>
 		</article>
 
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img id="restaurant-image1" style="height: 140px; width:250px;" src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul class="meta-search">
+					<li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
+					<li><i class="glyphicon glyphicon-time"></i> <span>OPEN</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Restaurant</span></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+				<h3><a id="restaurant-name1" href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
+				<table>
+					<tr><td>Rating: </th><th id="restaurant-rat1">Rating 	</th></tr>
+					<tr><td>Address: </th><th id="restaurant-addr1">Address </th></tr>
+					<tr><td>Phone: </td><th id="restaurant-phon1">Phone</th></tr>
+					<tr><td>Distance: </th><th id="restaurant-dist1">Distance </th></tr>
+				</table>
+						
+                <span class="plus"><a id="restaurant-URL1" href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix border"></span>
+		</article>
 
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-3">
+				<a href="#" title="Lorem ipsum" class="thumbnail"><img id="restaurant-image2" style="height: 140px; width:250px;" src="http://lorempixel.com/250/140/people" alt="Lorem ipsum"></a>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-2">
+				<ul class="meta-search">
+					<li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
+					<li><i class="glyphicon glyphicon-time"></i> <span>OPEN</span></li>
+					<li><i class="glyphicon glyphicon-tags"></i> <span>Restaurant</span></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+				<h3><a id="restaurant-name2" href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
+				<table>
+					<tr><td>Rating: </th><th id="restaurant-rat2">Rating 	</th></tr>
+					<tr><td>Address: </th><th id="restaurant-addr2">Address </th></tr>
+					<tr><td>Phone: </td><th id="restaurant-phon2">Phone</th></tr>
+					<tr><td>Distance: </th><th id="restaurant-dist2">Distance </th></tr>
+				</table>
+						
+                <span class="plus"><a id="restaurant-URL2" href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
+			</div>
+			<span class="clearfix border"></span>
+		</article>
 	</section>
 </div>
 {% endblock %}
