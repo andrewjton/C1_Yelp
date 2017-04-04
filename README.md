@@ -1,5 +1,6 @@
 # SHOUT
 `A User-Friendly web application powered by the Yelp Fusion API.`
+
 Live Demo and Overview: https://www.youtube.com/watch?v=1B-GNInJWo0&t=8s
 This app generates nearby restaurant suggestions driven by user choices in an interactive wizard.
 ![main image](https://github.com/andrewjton/SHOUT/blob/master/readme_imgs/main.png)
@@ -7,7 +8,6 @@ This app generates nearby restaurant suggestions driven by user choices in an in
 
 
 ------------------------------------------------------------------------
-
 
 
 ## Overview of Features
@@ -22,11 +22,13 @@ This app generates nearby restaurant suggestions driven by user choices in an in
 ------------------------------------------------------------------------
 
 
-## System Design
+## Overview of System Design
 ![system-design-img](https://github.com/andrewjton/SHOUT/blob/master/readme_imgs/system-design.png)
 
 
 ------------------------------------------------------------------------
+
+
 # Features Described in Depth
 
 ### Geolocation and Google Maps embedded
