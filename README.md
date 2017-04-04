@@ -2,7 +2,7 @@
 `A User-Friendly web application powered by the Yelp Fusion API.`
 
 Live Demo and Overview: https://www.youtube.com/watch?v=1B-GNInJWo0&t=8s
-This app generates nearby restaurant suggestions driven by user choices in an interactive wizard.
+This app generates nearby restaurant suggestions driven by user choices in an interactive wizard. The main django app is located in `app/shout`.
 ![main image](https://github.com/andrewjton/SHOUT/blob/master/readme_imgs/main.png)
 
 
