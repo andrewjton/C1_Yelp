@@ -16,7 +16,7 @@ This app generates nearby restaurant suggestions driven by user choices in an in
 3. Image-based User selection
 4. Organized User Data
 5. Security 
-6. Intereactive Mobile Responsive Design
+6. Interactive Mobile Responsive Design
 
 
 ------------------------------------------------------------------------
